@@ -3,7 +3,7 @@ const fs = require('fs'), path = require('path');
 const icons = path.resolve(__dirname, '..', '..', 'icons');
 const res = path.join(__dirname, 'android', 'app', 'src', 'main', 'res');
 if (!fs.existsSync(res)) { console.log('پوشهٔ android پیدا نشد؛ اول npx cap add android'); process.exit(0); }
-for (const d of fs.readdirSync(res).filter(n => n.startsWith('mipmap-'))) {
+for (const d of fs.readdirSync(res).filter(n => /^mipmap-(mdpi|hdpi|xhdpi|xxhdpi|xxxhdpi)$/.test(n))) {
   const dir = path.join(res, d);
   fs.copyFileSync(path.join(icons, 'icon-192.png'), path.join(dir, 'ic_launcher.png'));
   fs.copyFileSync(path.join(icons, 'icon-192.png'), path.join(dir, 'ic_launcher_round.png'));
